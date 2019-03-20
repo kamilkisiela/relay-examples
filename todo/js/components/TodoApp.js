@@ -28,10 +28,10 @@ type Props = {|
 
 const TodoApp = ({relay, user}: Props) => {
   const handleTextInputSave = (text: string) => {
-    AddTodoMutation.commit(relay.environment, text, user);
+    // KAMIL: this is how to make a mutation
+    AddTodoMutation.commit(relay.environment, text, user, user.id);
     return;
   };
-
   const hasTodos = user.totalCount > 0;
 
   return (
@@ -67,6 +67,7 @@ const TodoApp = ({relay, user}: Props) => {
   );
 };
 
+// KAMIL: consumes data
 export default createFragmentContainer(TodoApp, {
   user: graphql`
     fragment TodoApp_user on User {

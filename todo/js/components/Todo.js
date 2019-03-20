@@ -85,6 +85,7 @@ const Todo = ({relay, todo, user}: Props) => {
   );
 };
 
+// KAMIL: this is how fragment is created
 export default createFragmentContainer(Todo, {
   todo: graphql`
     fragment Todo_todo on Todo {

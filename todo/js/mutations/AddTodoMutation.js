@@ -60,6 +60,7 @@ function commit(
   environment: Environment,
   text: string,
   user: TodoApp_user,
+  queryId: string,
 ): Disposable {
   const input: AddTodoInput = {
     text,
@@ -72,12 +73,21 @@ function commit(
     variables: {
       input,
     },
-    updater: (store: RecordSourceSelectorProxy) => {
-      const payload = store.getRootField('addTodo');
-      const newEdge = payload.getLinkedRecord('todoEdge');
-      sharedUpdater(store, user, newEdge);
-    },
+    configs: [
+      {
+        type: 'RANGE_ADD',
+        parentID: queryId,
+        connectionInfo: [
+          {
+            key: 'TodoList_todos',
+            rangeBehavior: 'prepend',
+          },
+        ],
+        edgeName: 'todoEdge',
+      },
+    ],
     optimisticUpdater: (store: RecordSourceSelectorProxy) => {
+      // KAMIL: interesting how they do optimistic ui
       const id = 'client:newTodo:' + tempID++;
       const node = store.create(id, 'Todo');
       node.setValue(text, 'text');

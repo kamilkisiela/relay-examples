@@ -40,6 +40,7 @@ const mutation = graphql`
   }
 `;
 
+// KAMIL: they allow to define an optimistic response as an object
 function getOptimisticResponse(
   complete: boolean,
   todo: Todo_todo,

@@ -29,6 +29,7 @@ import {
 import TodoApp from './components/TodoApp';
 import type {appQueryResponse} from 'relay/appQuery.graphql';
 
+// KAMIL: it's super simple to customize fetcher
 async function fetchQuery(
   operation: RequestNode,
   variables: Variables,
@@ -47,6 +48,7 @@ async function fetchQuery(
   return response.json();
 }
 
+// KAMIL: it's like having multiple clients
 const modernEnvironment: Environment = new Environment({
   network: Network.create(fetchQuery),
   store: new Store(new RecordSource()),
@@ -54,6 +56,7 @@ const modernEnvironment: Environment = new Environment({
 
 const rootElement = document.getElementById('root');
 
+// KAMIL: interesting, they have also components to run queries
 if (rootElement) {
   ReactDOM.render(
     <QueryRenderer

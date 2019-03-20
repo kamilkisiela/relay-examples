@@ -61,18 +61,12 @@ function commit(
     variables: {
       input,
     },
-    updater: (store: RecordSourceSelectorProxy) => {
-      const payload = store.getRootField('removeTodo');
-      const deletedTodoId = payload.getValue('deletedTodoId');
-
-      if (typeof deletedTodoId !== 'string') {
-        throw new Error(
-          `Expected removeTodo.deletedTodoId to be string, but got: ${typeof deletedTodoId}`,
-        );
-      }
-
-      sharedUpdater(store, user, deletedTodoId);
-    },
+    configs: [
+      {
+        type: 'NODE_DELETE',
+        deletedIDFieldName: 'deletedTodoId'
+      },
+    ],
     optimisticUpdater: (store: RecordSourceSelectorProxy) => {
       sharedUpdater(store, user, todo.id);
     },

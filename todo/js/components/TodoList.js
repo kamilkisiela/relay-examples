@@ -68,6 +68,8 @@ const TodoList = ({
   );
 };
 
+// KAMIL: it has @connection which tells which parts are related to each other
+// TODO: check how the connection works, does allow to have condition, does it handle variables
 export default createFragmentContainer(TodoList, {
   user: graphql`
     fragment TodoList_user on User {

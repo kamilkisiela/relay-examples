@@ -40,6 +40,8 @@ const mutation = graphql`
   }
 `;
 
+// KAMIL: relay allow to delete nodes
+// KAMIL: it also has a connection
 function sharedUpdater(
   store: RecordSourceSelectorProxy,
   user: TodoListFooter_user,
